@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akshita - Digital Marketing Agency</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2C3531 0%, #116466 50%, #2C3531 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.2;
+            animation: pulse 8s infinite ease-in-out;
+        }
+
+        /* Cursor */
+        .cursor {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border: 2px solid #D1E8E2;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease-out;
+            box-shadow: 0 0 20px rgba(209, 232, 226, 0.5);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 40;
+            backdrop-filter: blur(20px);
+            background: rgba(44, 53, 49, 0.9);
+            border-bottom: 1px solid rgba(17, 100, 102, 0.3);
+            box-shadow: 0 4px 20px rgba(17, 100, 102, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #D1E8E2;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #FFCB9A;
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #D1E8E2;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            position: relative;
+            z-index: 10;
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 5rem;
+        }
+
+        .hero-content {
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #116466, #D1E8E2, #D9B08C, #FFCB9A);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            /* animation: gradient 3s ease infinite, pulse 2s infinite; */
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #FFCB9A, #D9B08C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #D1E8E2;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #116466, #D1E8E2);
+            color: #2C3531;
+            box-shadow: 0 10px 30px rgba(17, 100, 102, 0.5);
+        }
+
+        .btn-secondary {
+            border: 2px solid #D1E8E2;
+            color: #D1E8E2;
+            background: transparent;
+            box-shadow: 0 5px 20px rgba(209, 232, 226, 0.3);
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-secondary:hover {
+            background: #D1E8E2;
+            color: #2C3531;
+        }
+
+        /* Floating Icons */
+        .floating-icon {
+            position: absolute;
+            animation: bounce 3s infinite;
+            filter: drop-shadow(0 0 20px currentColor);
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+            color: #D9B08C;
+            font-size: 3rem;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 30%;
+            right: 10%;
+            color: #FFCB9A;
+            font-size: 2.5rem;
+            animation-delay: 0.5s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 30%;
+            left: 20%;
+            color: #D1E8E2;
+            font-size: 2rem;
+            animation-delay: 1s;
+        }
+
+        .floating-icon:nth-child(4) {
+            top: 50%;
+            right: 20%;
+            color: #116466;
+            font-size: 1.8rem;
+            animation-delay: 1.5s;
+        }
+
+        /* About Section */
+        .about {
+            background: rgba(44, 53, 49, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: auto;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #116466, #D1E8E2, #D9B08C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #FFCB9A, #D9B08C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: #D1E8E2;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(17, 100, 102, 0.3);
+            background: rgba(17, 100, 102, 0.2);
+        }
+
+        .stat-card h4 {
+            font-size: 3rem;
+            color: #116466;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card p {
+            color: #D1E8E2;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Skills */
+        .skills h4 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #D9B08C, #FFCB9A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skill {
+            margin-bottom: 2rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+            color: #D1E8E2;
+        }
+
+        .skill-percentage {
+            font-weight: bold;
+            background: linear-gradient(45deg, #D9B08C, #FFCB9A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(44, 53, 49, 0.5);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 2s infinite;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 2.5rem;
+            border-radius: 25px;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: scale(1.1);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+            text-align: center;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .service-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .service-tag {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Projects Section */
+        .projects {
+            background: rgba(44, 53, 49, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 2px solid;
+            transition: all 0.5s ease;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+
+        .project-indicator {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .project-card p {
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .project-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .project-url {
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .project-link {
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            transform: scale(1.25);
+        }
+
+        /* Contact Section */
+        .contact-intro {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .contact-intro p {
+            font-size: 1.5rem;
+            color: #D1E8E2;
+            line-height: 1.6;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            padding: 2.5rem;
+            border-radius: 25px;
+            border: 2px solid;
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .contact-card:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-card i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover i {
+            transform: scale(1.25);
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: #D1E8E2;
+        }
+
+        .contact-card p {
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .contact-card a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem;
+            border-top: 2px solid rgba(17, 100, 102, 0.3);
+            background: linear-gradient(90deg, #2C3531, #116466);
+            text-align: center;
+        }
+
+        .footer-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, #D9B08C, #FFCB9A, #D1E8E2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-subtitle {
+            font-size: 1.2rem;
+            color: #D1E8E2;
+            margin-bottom: 2rem;
+        }
+
+        .footer-copyright {
+            color: #FFCB9A;
+            font-weight: 600;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(90deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            75% { transform: translateY(-10px) rotate(270deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+        /* Mobile Menu */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #D1E8E2;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu-btn:hover {
+    transform: scale(1.1);
+}
+
+.mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(44, 53, 49, 0.95);
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.mobile-menu a {
+    color: #FFCB9A;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.mobile-menu a:hover {
+    color: #D1E8E2;
+}
+
+/* Responsive Typography */
+.hero h1 {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+}
+
+.hero h2 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+.hero p {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+.section-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+}
+
+/* Mobile Breakpoints */
+@media (max-width: 1024px) {
+    .cursor {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .hero {
+        padding-top: 8rem;
+        min-height: 90vh;
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+
+    .floating-icon {
+        font-size: clamp(1.5rem, 3vw, 2rem) !important;
+    }
+
+    .floating-icon:nth-child(3), 
+    .floating-icon:nth-child(4) {
+        display: none;
+    }
+
+    section {
+        padding: 4rem 1.5rem;
+    }
+
+    .service-card,
+    .project-card,
+    .contact-card {
+        padding: 2rem;
+    }
+
+    .services-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        padding: 1rem;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    section {
+        padding: 3rem 1rem;
+    }
+
+    .hero {
+        padding-top: 7rem;
+    }
+
+    .service-card,
+    .project-card,
+    .contact-card {
+        padding: 1.5rem;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 360px) {
+    .btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .service-card,
+    .project-card,
+    .contact-card {
+        padding: 1.2rem;
+    }
+}
+
+/* Landscape orientation fixes */
+@media (orientation: landscape) and (max-height: 600px) {
+    .hero {
+        min-height: 100vh;
+        padding-top: 6rem;
+    }
+
+    .floating-icon {
+        display: none;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Cursor -->
+    <div class="cursor" id="cursor"></div>
+
+    <!-- Animated Background -->
+    <div class="bg-particles" id="bgParticles"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">DSF</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="floating-icon"><i class="fas fa-code"></i></div>
+            <div class="floating-icon"><i class="fas fa-bolt"></i></div>
+            <!-- <div class="floating-icon"><i class="fas fa-chart-line"></i></div> -->
+            <div class="floating-icon"><i class="fas fa-sparkles"></i></div>
+            
+            <div style="margin-bottom: 2rem;">
+                <i class="fas fa-sparkles" style="font-size: 4rem; color: #D1E8E2; animation: spin 3s linear infinite;"></i>
+            </div>
+            <h1>Akshita</h1>
+            <h2>Digital Marketing Agency</h2>
+            <p>
+                🚀 Transforming businesses through <span style="color: #D9B08C; font-weight: bold;">innovative web development</span>, 
+                <span style="color: #FFCB9A; font-weight: bold;">strategic SEO</span>, 
+                <span style="color: #D1E8E2; font-weight: bold;">social media mastery</span>, and 
+                <span style="color: #116466; font-weight: bold;">data-driven advertising</span> solutions! ✨
+            </p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary">
+                    <i class="fas fa-star"></i>
+                    View Our Work
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="btn btn-secondary">
+                    Get In Touch 💫
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="section-title">✨ About Us ✨</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>🎨 Crafting Digital Excellence</h3>
+                <p>
+                    I'm <span style="color: #D9B08C; font-weight: bold;">Akshita</span>, a passionate full-stack developer and digital marketing strategist. 
+                    My agency specializes in creating <span style="color: #FFCB9A; font-weight: bold;">powerful digital experiences</span> that drive real business results!
+                </p>
+                <p>
+                    With expertise spanning from <span style="color: #116466; font-weight: bold;">cutting-edge web development</span> to 
+                    <span style="color: #D9B08C; font-weight: bold;">strategic marketing automation</span>, 
+                    we transform ideas into <span style="color: #FFCB9A; font-weight: bold;">thriving digital empires</span>! 🚀
+                </p>
+                <p>
+                    Our mission is simple: leverage technology and creativity to build solutions that don't just meet 
+                    expectations—they <span style="color: #D9B08C; font-weight: bold;">shatter them</span>! Every project is a canvas for innovation! ✨
+                </p>
+                <div class="stats">
+                    <div class="stat-card">
+                        <h4>50+</h4>
+                        <p>Projects Delivered</p>
+                    </div>
+                    <div class="stat-card" style="background: rgba(209, 232, 226, 0.2); border-color: rgba(209, 232, 226, 0.3);">
+                        <h4 style="color: #D1E8E2;">100%</h4>
+                        <p>Client Satisfaction</p>
+                    </div>
+                </div>
+            </div>
+            <div class="skills">
+                <h4>💻 Technical Expertise</h4>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">HTML/CSS</span>
+                        <span class="skill-percentage">95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%; background: #116466;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">JavaScript</span>
+                        <span class="skill-percentage">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%; background: #2C3531;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">React</span>
+                        <span class="skill-percentage">88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%; background: #D9B08C;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">Next.js</span>
+                        <span class="skill-percentage">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%; background: #FFCB9A;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">PHP</span>
+                        <span class="skill-percentage">82%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 82%; background: #D1E8E2;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">Laravel</span>
+                        <span class="skill-percentage">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%; background: #116466;"></div>
+                    </div>
+                </div>
+                <div class="skill">
+                    <div class="skill-header">
+                        <span class="skill-name">Python</span>
+                        <span class="skill-percentage">75%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%; background: #D9B08C;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2 class="section-title">🎯 Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card" style="background: #116466; color: #D1E8E2;">
+                <i class="fas fa-globe" style="color: #D1E8E2;"></i>
+                <h3>Website Development</h3>
+                <p>Custom web solutions built with cutting-edge technologies that drive results</p>
+                <div class="service-tags">
+                    <span class="service-tag" style="background: rgba(209, 232, 226, 0.2); border: 1px solid rgba(209, 232, 226, 0.3); color: #D1E8E2;">React</span>
+                    <span class="service-tag" style="background: rgba(209, 232, 226, 0.2); border: 1px solid rgba(209, 232, 226, 0.3); color: #D1E8E2;">Next.js</span>
+                    <span class="service-tag" style="background: rgba(209, 232, 226, 0.2); border: 1px solid rgba(209, 232, 226, 0.3); color: #D1E8E2;">Laravel</span>
+                    <span class="service-tag" style="background: rgba(209, 232, 226, 0.2); border: 1px solid rgba(209, 232, 226, 0.3); color: #D1E8E2;">PHP</span>
+                </div>
+            </div>
+            
+            <div class="service-card" style="background: #2C3531; color: #D9B08C;">
+                <i class="fas fa-search" style="color: #D9B08C;"></i>
+                <h3>SEO Marketing</h3>
+                <p>Boost your visibility and dominate search rankings with proven strategies</p>
+                <div class="service-tags">
+                    <span class="service-tag" style="background: rgba(217, 176, 140, 0.2); border: 1px solid rgba(217, 176, 140, 0.3); color: #D9B08C;">On-Page SEO</span>
+                    <span class="service-tag" style="background: rgba(217, 176, 140, 0.2); border: 1px solid rgba(217, 176, 140, 0.3); color: #D9B08C;">Link Building</span>
+                    <span class="service-tag" style="background: rgba(217, 176, 140, 0.2); border: 1px solid rgba(217, 176, 140, 0.3); color: #D9B08C;">Analytics</span>
+                </div>
+            </div>
+            
+            <div class="service-card" style="background: #D9B08C; color: #2C3531;">
+                <i class="fas fa-users" style="color: #2C3531;"></i>
+                <h3>Social Media Handling</h3>
+                <p>Engaging content that converts followers to loyal customers</p>
+                <div class="service-tags">
+                    <span class="service-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">Content Strategy</span>
+                    <span class="service-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">Community Management</span>
+                    <span class="service-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">Influencer Marketing</span>
+                </div>
+            </div>
+            
+            <div class="service-card" style="background: #FFCB9A; color: #2C3531;">
+                <i class="fas fa-mouse-pointer" style="color: #2C3531;"></i>
+                <h3>Google Ads</h3>
+                <p>ROI-focused campaigns that drive real, measurable results</p>
+                <div class="service-tags">
+                    <span class="service-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">PPC Management</span>
+                    <span class="service-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">Campaign Optimization</span>
+                    <span class="service-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">Conversion Tracking</span>
+                </div>
+            </div>
+            
+            <div class="service-card" style="background: #D1E8E2; color: #116466;">
+                <i class="fas fa-lightbulb" style="color: #116466;"></i>
+                <h3>Business Ideas</h3>
+                <p>Strategic consulting to accelerate your business growth</p>
+                <div class="service-tags">
+                    <span class="service-tag" style="background: rgba(17, 100, 102, 0.2); border: 1px solid rgba(17, 100, 102, 0.3); color: #116466;">Market Analysis</span>
+                    <span class="service-tag" style="background: rgba(17, 100, 102, 0.2); border: 1px solid rgba(17, 100, 102, 0.3); color: #116466;">Growth Strategy</span>
+                    <span class="service-tag" style="background: rgba(17, 100, 102, 0.2); border: 1px solid rgba(17, 100, 102, 0.3); color: #116466;">Digital Transformation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2 class="section-title">🌟 Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card" style="background: #116466; border-color: #D1E8E2; color: #D1E8E2;">
+                <div class="project-indicator" style="background: #D1E8E2;"></div>
+                <h3>SellCo.ai</h3>
+                <p>Revolutionary AI-powered sales automation platform transforming e-commerce</p>
+                <div class="project-tags">
+                    <span class="project-tag" style="background: rgba(209, 232, 226, 0.2); border: 1px solid rgba(209, 232, 226, 0.3); color: #D1E8E2;">Next.js</span>
+                    <span class="project-tag" style="background: rgba(209, 232, 226, 0.2); border: 1px solid rgba(209, 232, 226, 0.3); color: #D1E8E2;">AI Integration</span>
+                    <span class="project-tag" style="background: rgba(209, 232, 226, 0.2); border: 1px solid rgba(209, 232, 226, 0.3); color: #D1E8E2;">Python</span>
+                </div>
+                <div class="project-footer">
+                    <span class="project-url">sellco.ai</span>
+                    <i class="fas fa-external-link-alt project-link" style="color: #D1E8E2;"></i>
+                </div>
+            </div>
+            
+            <div class="project-card" style="background: #2C3531; border-color: #FFCB9A; color: #FFCB9A;">
+                <div class="project-indicator" style="background: #FFCB9A;"></div>
+                <h3>Gadda.co</h3>
+                <p>Ultra-modern e-commerce solution with seamless user experience</p>
+                <div class="project-tags">
+                    <span class="project-tag" style="background: rgba(255, 203, 154, 0.2); border: 1px solid rgba(255, 203, 154, 0.3); color: #FFCB9A;">React</span>
+                    <span class="project-tag" style="background: rgba(255, 203, 154, 0.2); border: 1px solid rgba(255, 203, 154, 0.3); color: #FFCB9A;">Laravel</span>
+                    <span class="project-tag" style="background: rgba(255, 203, 154, 0.2); border: 1px solid rgba(255, 203, 154, 0.3); color: #FFCB9A;">Payment Gateway</span>
+                </div>
+                <div class="project-footer">
+                    <span class="project-url">gadda.co</span>
+                    <i class="fas fa-external-link-alt project-link" style="color: #FFCB9A;"></i>
+                </div>
+            </div>
+            
+            <div class="project-card" style="background: #D9B08C; border-color: #2C3531; color: #2C3531;">
+                <div class="project-indicator" style="background: #2C3531;"></div>
+                <h3>FusionFameDigital.ai</h3>
+                <p>Comprehensive digital marketing automation suite powered by AI</p>
+                <div class="project-tags">
+                    <span class="project-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">Next.js</span>
+                    <span class="project-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">AI Tools</span>
+                    <span class="project-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">Analytics</span>
+                </div>
+                <div class="project-footer">
+                    <span class="project-url">fusionfamedigital.ai</span>
+                    <i class="fas fa-external-link-alt project-link" style="color: #2C3531;"></i>
+                </div>
+            </div>
+            
+            <div class="project-card" style="background: #FFCB9A; border-color: #116466; color: #116466;">
+                <div class="project-indicator" style="background: #116466;"></div>
+                <h3>K Beauty Secrets</h3>
+                <p>Luxury beauty & skincare platform with personalized recommendations</p>
+                <div class="project-tags">
+                    <span class="project-tag" style="background: rgba(17, 100, 102, 0.2); border: 1px solid rgba(17, 100, 102, 0.3); color: #116466;">PHP</span>
+                    <span class="project-tag" style="background: rgba(17, 100, 102, 0.2); border: 1px solid rgba(17, 100, 102, 0.3); color: #116466;">Laravel</span>
+                    <span class="project-tag" style="background: rgba(17, 100, 102, 0.2); border: 1px solid rgba(17, 100, 102, 0.3); color: #116466;">MySQL</span>
+                </div>
+                <div class="project-footer">
+                    <span class="project-url">kbeautysecrets.in</span>
+                    <i class="fas fa-external-link-alt project-link" style="color: #116466;"></i>
+                </div>
+            </div>
+            
+            <div class="project-card" style="background: #D1E8E2; border-color: #2C3531; color: #2C3531;">
+                <div class="project-indicator" style="background: #2C3531;"></div>
+                <h3>AeroFly Ticket</h3>
+                <p>Next-gen flight booking & travel platform with smart recommendations</p>
+                <div class="project-tags">
+                    <span class="project-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">React</span>
+                    <span class="project-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">API Integration</span>
+                    <span class="project-tag" style="background: rgba(44, 53, 49, 0.2); border: 1px solid rgba(44, 53, 49, 0.3); color: #2C3531;">Payment Systems</span>
+                </div>
+                <div class="project-footer">
+                    <span class="project-url">aeroflyticket.com</span>
+                    <i class="fas fa-external-link-alt project-link" style="color: #2C3531;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">✨ Let's Create Magic ✨</h2>
+        <div class="contact-intro">
+            <p>
+                Ready to transform your digital presence? 🚀 Let's discuss how we can bring your vision to life 
+                with <span style="color: #D9B08C; font-weight: bold;">cutting-edge technology</span> and 
+                <span style="color: #FFCB9A; font-weight: bold;">strategic marketing brilliance</span>! ⭐
+            </p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card" style="background: rgba(217, 176, 140, 0.2); border-color: rgba(217, 176, 140, 0.3);">
+                <i class="fas fa-envelope" style="color: #D9B08C;"></i>
+                <h3>Email</h3>
+                <p style="color: #FFCB9A;">
+                    <a href="mailto:hello@akshita.agency">hello@akshita.agency</a>
+                </p>
+            </div>
+            
+            <div class="contact-card" style="background: rgba(17, 100, 102, 0.2); border-color: rgba(17, 100, 102, 0.3);">
+                <i class="fas fa-phone" style="color: #116466;"></i>
+                <h3>Phone</h3>
+                <p style="color: #FFCB9A;">
+                    <a href="tel:+919457380527">+91 9457380527</a>
+                </p>
+            </div>
+            
+            <div class="contact-card" style="background: rgba(209, 232, 226, 0.2); border-color: rgba(209, 232, 226, 0.3);">
+                <i class="fab fa-linkedin" style="color: #D1E8E2;"></i>
+                <h3>LinkedIn</h3>
+                <p style="color: #FFCB9A;">Connect with me</p>
+            </div>
+            
+            <div class="contact-card" style="background: rgba(255, 203, 154, 0.2); border-color: rgba(255, 203, 154, 0.3);">
+                <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                <h3>WhatsApp</h3>
+                <p style="color: #FFCB9A;">
+                    <a href="https://wa.me/919457380527" target="_blank">+91 9457380527</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-title">✨ Akshita Digital Agency ✨</div>
+        <div class="footer-subtitle">🚀 Crafting tomorrow's digital experiences, today! 🌟</div>
+        <div class="footer-copyright">© 2024 Akshita Digital Agency. All rights reserved. Made with 💖</div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/919457380527" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Cursor follower
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = (e.clientX - 16) + 'px';
+            cursor.style.top = (e.clientY - 16) + 'px';
+        });
+
+        // Create animated particles
+        const bgParticles = document.getElementById('bgParticles');
+        
+        // Create small particles
+        for (let i = 0; i < 60; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.width = (2 + Math.random() * 4) + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (3 + Math.random() * 6) + 's';
+            bgParticles.appendChild(particle);
+        }
+
+        // Create large orbs
+        for (let i = 0; i < 4; i++) {
+            const orb = document.createElement('div');
+            orb.className = 'orb';
+            orb.style.left = (10 + Math.random() * 80) + '%';
+            orb.style.top = (10 + Math.random() * 80) + '%';
+            orb.style.width = (150 + Math.random() * 200) + 'px';
+            orb.style.height = orb.style.width;
+            orb.style.animationDelay = Math.random() * 4 + 's';
+            orb.style.animationDuration = (4 + Math.random() * 4) + 's';
+            bgParticles.appendChild(orb);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animate skill bars on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const skillBars = entry.target.querySelectorAll('.skill-progress');
+                    skillBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 500);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const skillsSection = document.querySelector('.skills');
+        if (skillsSection) {
+            observer.observe(skillsSection);
+        }
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Add hover effects for service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add hover effects for project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add click to call functionality
+        document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (!navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
+                    e.preventDefault();
+                    alert('Call: ' + this.textContent);
+                }
+            });
+        });
+
+        console.log('🚀 Akshita Digital Agency Portfolio Loaded Successfully! ✨');
+    </script>
+</body>
+</html>
