@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Only For Harsh ❤️</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  background:linear-gradient(-45deg,#ffdde1,#ee9ca7,#fbc2eb,#fad0c4);
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+section{
+  display:none;
+  width:100%;
+  max-width:420px;
+  padding:20px;
+  animation:fade .8s ease;
+}
+section.active{display:block}
+
+.card{
+  background:rgba(255,255,255,.35);
+  backdrop-filter:blur(16px);
+  border-radius:26px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 30px 60px rgba(255,0,80,.25);
+  border:1px solid rgba(255,255,255,.4);
+}
+
+h1,h2{
+  color:#b5173f;
+  text-shadow:0 0 12px rgba(255,80,120,.5);
+}
+
+p{
+  color:#5a1a2c;
+  font-size:15px;
+  line-height:1.7;
+  margin-top:10px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin-top:12px;
+  border-radius:30px;
+  border:none;
+  outline:none;
+  font-size:15px;
+  text-align:center;
+}
+
+button{
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+  color:white;
+  border:none;
+  padding:14px 28px;
+  margin-top:15px;
+  border-radius:40px;
+  font-size:15px;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 10px 20px rgba(255,0,80,.3);
+}
+button:hover{transform:scale(1.08)}
+
+.shake{
+  animation:shake .3s;
+}
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-6px)}
+  100%{transform:translateX(0)}
+}
+
+/* Hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  animation:float 7s linear infinite;
+  opacity:.7;
+}
+@keyframes float{
+  to{transform:translateY(-120vh)}
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Slider */
+.slider img{
+  width:300px;
+  height: 300px;
+  border-radius:18px;
+  display:none;
+}
+.slider img.active{display:block}
+
+/* Heartbeat */
+.heartbeat{
+  font-size:30px;
+  animation:beat 1s infinite;
+}
+@keyframes beat{
+  0%{transform:scale(1)}
+  25%{transform:scale(1.1)}
+  40%{transform:scale(1)}
+  60%{transform:scale(1.15)}
+  100%{transform:scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎶 MUSIC -->
+<audio id="bgMusic" preload="auto" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2023/09/15/audio_4b7c5c7d5b.mp3?filename=romantic-indian-love-145038.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 🔐 LOCK SCREEN -->
+<section class="active" id="lock">
+  <div class="card" id="lockCard">
+    <h1>🔐 Only For Harsh</h1>
+    <p>Enter the secret code to unlock my heart ❤️</p>
+    <input type="password" id="code" placeholder="Enter secret code">
+    <button onclick="unlock()">Unlock 💖</button>
+    <p id="error" style="color:#b5173f;margin-top:8px;"></p>
+  </div>
+</section>
+
+<!-- STEP 1 -->
+<section id="step1">
+  <div class="card">
+    <h1>Will you be my Valentine, Harsh? ❤️</h1>
+    <button onclick="startMusic();yesFlow()">Yes 💖</button>
+    <button onclick="startMusic();noFlow()">No 😒</button>
+    <div id="buttons1"></div>
+  </div>
+</section>
+
+<!-- STEP 2 -->
+<section id="step2">
+  <div class="card">
+    <h2>My Forever ❤️</h2>
+    <p>
+      Loving you feels like magic — calm yet exciting.
+      Every heartbeat of mine whispers your name. 💗
+    </p>
+    <button onclick="showStep(3)">Next ➜</button>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section id="step3">
+  <div class="card">
+    <h2>Our Love Story 📸</h2>
+    <p>All time Sleepy</p>
+    <div class="slider">
+      <img src="bd.jpg" class="active">
+      
+    </div>
+    <button onclick="showStep(4)">Next ➜</button>
+  </div>
+</section>
+
+
+
+<!-- STEP 5 -->
+<section id="step4">
+  <div class="card">
+    <h1 class="heartbeat">AWWWWWWW <br> I LOVE YOU ❤️</h1>
+    <h2>Forever & Always 🥰</h2>
+  </div>
+</section>
+
+<script>
+const music=document.getElementById("bgMusic");
+
+/* Unlock */
+function unlock(){
+  const code=document.getElementById("code").value;
+  const card=document.getElementById("lockCard");
+  if(code==="0109"){
+    showStep(1);
+  }else{
+    card.classList.add("shake");
+    setTimeout(()=>card.classList.remove("shake"),300);
+    document.getElementById("error").innerText="Wrong code 😜 Try again";
+  }
+}
+
+/* Music */
+function startMusic(){
+  music.play().catch(()=>{});
+}
+
+/* Navigation */
+function showStep(n){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+  document.getElementById("step"+n)?.classList.add("active");
+}
+
+/* Yes / No */
+let noCount=0;
+const noTexts=["Pakka? 😏","Aise kaise nahi 😤","Banna to padega 😌","Yes ❤️"];
+
+function yesFlow(){
+  document.getElementById("buttons1").innerHTML=
+    `<button onclick="showStep(2)">Pakka na? 🥰</button>`;
+}
+
+function noFlow(){
+  document.getElementById("buttons1").innerHTML=
+    `<button onclick="noFlow()">${noTexts[noCount]}</button>`;
+  if(noCount===noTexts.length-1){
+    document.getElementById("buttons1").innerHTML=
+      `<button onclick="showStep(2)">Yes ❤️</button>`;
+  }
+  noCount++;
+}
+
+/* Slider */
+let slideIndex=0;
+function nextSlide(){
+  let slides=document.querySelectorAll(".slider img");
+  slides[slideIndex].classList.remove("active");
+  slideIndex=(slideIndex+1)%slides.length;
+  slides[slideIndex].classList.add("active");
+}
+
+/* Hearts */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(18+Math.random()*22)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},450);
+</script>
+
+</body>
+</html>
